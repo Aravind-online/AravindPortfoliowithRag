@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Vercel
+.vercel/
+
+# IDE
+.vscode/
+.idea/
+
+.vercel
