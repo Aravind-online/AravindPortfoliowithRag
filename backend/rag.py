@@ -69,7 +69,6 @@ def generate_answer(
 
 class KnowledgeBase:
     def __init__(self, url: str, api_key: str) -> None:
-        DATA_DIR.mkdir(parents=True, exist_ok=True)
         parsed_url = urlsplit(url.rstrip("/"))
         if parsed_url.scheme != "https":
             raise ValueError("QDRANT_URL must use HTTPS for Qdrant Cloud.")
@@ -87,6 +86,10 @@ class KnowledgeBase:
         return self._embedding_model
 
     def index_documents(self) -> int:
+        if not DATA_DIR.is_dir():
+            print("No document data directory found. Skipping local document indexing.")
+            return 0
+
         files = sorted(
             path
             for path in DATA_DIR.rglob("*")
